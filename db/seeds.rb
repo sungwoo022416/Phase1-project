@@ -1,11 +1,14 @@
 require 'rest-client'
 require 'json'
+require 'pry'
 
-
-BASE_URL = "http://data.nba.net/10s/prod/v1/today.json"
 TEAM_URL = "http://data.nba.net/10s//prod/v2/2021/teams.json"
 PLAYER_URL = "https://data.nba.net/10s/prod/v1/2021/players.json"
 
+def get_base_data_from_api
+    base_response = RestClient.get(BASE_URL)
+    base_hash = JSON.parse(base_response)
+end
 
 def get_team_from_api
     team_response = RestClient.get(TEAM_URL)
@@ -18,14 +21,18 @@ def get_player_from_api
 end
 
 ROSTER = get_player_from_api["league"]["standard"]
-TEAM_LIST = list = get_team_from_api["league"]["standard"]
+TEAM_LIST = get_team_from_api["league"]["standard"]
 
 def data_teams
+    
     if !get_team_from_api.nil?
-            TEAM_LIST.map do |team|
+        TEAM_LIST.map do |team|
                 if team["isNBAFranchise"] == true
-                Team.create(name: "#{team["fullName"]}", city: "#{team["city"]}", division: "#{team["divName"]}", 
-                conference: "#{team["confName"]}", team_number: "#{team["teamId"]}")
+                Team.create(id: "#{team["teamId"]}", 
+                name: "#{team["nickname"]}", 
+                city: "#{team["city"]}", 
+                division: "#{team["divName"]}", 
+                conference: "#{team["confName"]}")
             end
         end
     else
@@ -50,8 +57,11 @@ def data_players
     if !get_player_from_api.nil?
         ROSTER.map do |player|
             if player["isActive"] == true
-            Player.create(name: "#{player["temporaryDisplayName"]}", position: "#{player["teamSitesOnly"]["posFull"]}", 
-            years_pro: "#{player["yearsPro"]}", team: "#{player["teamId"]}")
+            Player.create(id: "#{player["personId"]}", 
+            first_name: "#{player["firstName"]}",
+            last_name: "#{player["lastName"]}", 
+            position: "#{player["teamSitesOnly"]["posFull"]}", 
+            years_pro: "#{player["yearsPro"]}")
             end
         end
     else
@@ -70,6 +80,18 @@ end
 #         end
 # end
 
+def data_contracts
+    ROSTER.map do |contract|
+        Contract.create(
+            first_name: "#{contract["firstName"]}",
+            last_name: "#{contract["lastName"]}", 
+            term_start: "#{contract["teams"].last["seasonStart"]}",
+            term_end: "#{contract["teams"].last["seasonEnd"]}",
+            player_id: "#{contract["personId"]}", 
+            team_id: "#{contract["teamId"]}")
+    end
+end
 
-
-
+data_teams
+data_players
+data_contracts

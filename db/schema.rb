@@ -13,13 +13,17 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "contracts", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "term_start"
+    t.integer "term_end"
     t.integer "player_id"
     t.integer "team_id"
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "position"
     t.integer "years_pro"
     t.integer "team"
@@ -30,7 +34,6 @@ ActiveRecord::Schema.define(version: 3) do
     t.string "city"
     t.string "division"
     t.string "conference"
-    t.integer "team_number"
   end
 
 end
