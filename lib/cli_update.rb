@@ -1,8 +1,5 @@
 require "tty-prompt"
 
-
-PROMPT = TTY::Prompt.new
-
 def modify_contract
     
     player = look_player_id
