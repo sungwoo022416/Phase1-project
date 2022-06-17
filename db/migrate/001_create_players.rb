@@ -1,4 +1,4 @@
-class CreatePlayers < ActiveRecord::Migration[5.2]
+class CreatePlayers < ActiveRecord::Migration[6.1]
     def change
         create_table :players, id: false, primary_key: :player_id do |t|
             t.primary_key :id
@@ -6,7 +6,6 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
             t.string      :last_name
             t.string      :position
             t.integer     :years_pro
-            t.integer     :team
         end
     end
 end

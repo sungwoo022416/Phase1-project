@@ -1,11 +1,15 @@
+require 'pry'
 class Player < ActiveRecord::Base
     has_many :contracts
     has_many :teams, through: :contracts
 
-    def full_name
-        "#{first_name} #{last_name}"
+    Player.joins(:contracts)
+
+    def Player.find_player(first, last)
+        Player.find_by! first_name: "#{first}", last_name: "#{last}"
     end
-    # def list_contracts
-    #     contracts.select {|player| player.name == self}
-    # end
+    
+    def find_team
+        contracts.filter {|player| player.id == self}
+    end
 end

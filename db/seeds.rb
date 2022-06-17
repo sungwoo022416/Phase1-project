@@ -5,11 +5,6 @@ require 'pry'
 TEAM_URL = "http://data.nba.net/10s//prod/v2/2021/teams.json"
 PLAYER_URL = "https://data.nba.net/10s/prod/v1/2021/players.json"
 
-def get_base_data_from_api
-    base_response = RestClient.get(BASE_URL)
-    base_hash = JSON.parse(base_response)
-end
-
 def get_team_from_api
     team_response = RestClient.get(TEAM_URL)
     team_hash = JSON.parse(team_response)
@@ -28,7 +23,7 @@ def data_teams
     if !get_team_from_api.nil?
         TEAM_LIST.map do |team|
                 if team["isNBAFranchise"] == true
-                Team.create(id: "#{team["teamId"]}", 
+                team["nickname"] = Team.create(id: "#{team["teamId"]}", 
                 name: "#{team["nickname"]}", 
                 city: "#{team["city"]}", 
                 division: "#{team["divName"]}", 
@@ -39,18 +34,6 @@ def data_teams
         puts "error seeding the teams"
     end
 end
-
-
-# def find_team(team_name)
-#     found_team = get_team_from_api["league"]["vegas"].detect {|team| team["nickname"].downcase == team_name}
-    
-#         if found_team.nil?
-#             raise "Can't Find the Team!"
-#         else
-#             puts "Yes! We found the #{found_team["fullName"]}"
-#         end
-# end
-
 
 def data_players
 
@@ -69,22 +52,9 @@ def data_players
     end
 end
 
-    
-# def find_player(player_name)
-#     found_player = get_player_from_api["league"]["standard"].detect {|player| player["temporaryDisplayName"].downcase == player_name}
-#     found_player_id = found_player["personId"]
-#         if found_player.nil?
-#             raise "Can't Find the Player!"
-#         else
-#             puts "Yes! We found the #{found_player["temporaryDisplayName"]}"
-#         end
-# end
-
 def data_contracts
     ROSTER.map do |contract|
         Contract.create(
-            first_name: "#{contract["firstName"]}",
-            last_name: "#{contract["lastName"]}", 
             term_start: "#{contract["teams"].last["seasonStart"]}",
             term_end: "#{contract["teams"].last["seasonEnd"]}",
             player_id: "#{contract["personId"]}", 

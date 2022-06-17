@@ -1,4 +1,4 @@
-class CreateTeams < ActiveRecord::Migration[5.2]
+class CreateTeams < ActiveRecord::Migration[6.1]
     def change
         create_table :teams, id: false, primary_key: :team_id do |t|
             t.primary_key :id

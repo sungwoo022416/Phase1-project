@@ -1,8 +1,6 @@
-class CreateContracts < ActiveRecord::Migration[5.2]
+class CreateContracts < ActiveRecord::Migration[6.1]
     def change
         create_table :contracts do |t|
-            t.string   :first_name
-            t.string   :last_name
             t.integer  :term_start
             t.integer  :term_end
             t.integer  :player_id
