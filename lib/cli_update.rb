@@ -14,26 +14,34 @@ def modify_contract
         change = gets.chomp.to_i
         Contract.update_contract(player,team).update(term_start: change)
 
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
     when 2
         puts "How do you want to change it?"
         change = gets.chomp.to_i
         Contract.update_contract(player,team).update(term_end: change)
+
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
     
     when 3
         puts "How do you want to change it?"
         
-        first = gets.chomp
-        last = gets.chomp
+        first = gets.chomp.upcase
+        last = gets.chomp.upcase
         
         result = Player.find_player(first, last).id
         Contract.update_contract(player,team).update(player_id: result)
 
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
     when 4
         puts "How do you want to change it?"
-        change = gets.chomp
+        change = gets.chomp.upcase
         
         result = Team.find_team(change).id
         Contract.update_contract(player,team).update(team_id: result)
+
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
 
     when 5
         puts "How do you want to change the starting date?"
@@ -44,19 +52,23 @@ def modify_contract
 
         Contract.update_contract(player,team).update(term_start: first, term_end: second)
 
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
     when 6
         puts "How do you want to change the player?"
-        first = gets.chomp
-        last = gets.chomp
+        first = gets.chomp.upcase
+        last = gets.chomp.upcase
             
         p_name = Player.find_player(first, last).id
 
         puts "How do you want to change the team?"
-        change = gets.chomp
+        change = gets.chomp.upcase
 
         t_name = Team.find_team(change).id
 
         Contract.update_contract(player,team).update(player_id: p_name, team_id: t_name)
+
+        puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
 
     when 7
         delete_contract

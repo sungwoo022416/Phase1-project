@@ -3,5 +3,5 @@ def delete_contract
     team = look_team_id
 
     Contract.terminate_contract(player, team)
-    puts "Complete!"
+    puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
 end

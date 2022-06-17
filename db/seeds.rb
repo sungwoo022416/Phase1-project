@@ -23,11 +23,11 @@ def data_teams
     if !get_team_from_api.nil?
         TEAM_LIST.map do |team|
                 if team["isNBAFranchise"] == true
-                team["nickname"] = Team.create(id: "#{team["teamId"]}", 
-                name: "#{team["nickname"]}", 
-                city: "#{team["city"]}", 
-                division: "#{team["divName"]}", 
-                conference: "#{team["confName"]}")
+                Team.create(id: "#{team["teamId"]}", 
+                name: "#{team["nickname"]}".upcase, 
+                city: "#{team["city"]}".upcase, 
+                division: "#{team["divName"]}".upcase, 
+                conference: "#{team["confName"]}".upcase)
             end
         end
     else
@@ -41,9 +41,9 @@ def data_players
         ROSTER.map do |player|
             if player["isActive"] == true
             Player.create(id: "#{player["personId"]}", 
-            first_name: "#{player["firstName"]}",
-            last_name: "#{player["lastName"]}", 
-            position: "#{player["teamSitesOnly"]["posFull"]}", 
+            first_name: "#{player["firstName"]}".upcase,
+            last_name: "#{player["lastName"]}".upcase, 
+            position: "#{player["teamSitesOnly"]["posFull"]}".upcase, 
             years_pro: "#{player["yearsPro"]}")
             end
         end

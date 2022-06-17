@@ -10,9 +10,9 @@ loop do
     pic
     case option_select
     when 1
-        find_team_by_user
+        team_choice
     when 2
-        find_player_by_user
+        player_choice
     when 3
         sign_contract 
     when 4
@@ -21,15 +21,27 @@ loop do
         modify_contract
     end
     
+    PROMPT.keypress("Press any key to continue".upcase, timeout: 20)
     puts("
     ╭━━━┳━━━┳━━━╮╭╮╱╱╭┳━━━┳╮╱╭╮╭━━━┳━━━┳━╮╱╭┳━━━┳━━━╮
     ┃╭━╮┃╭━╮┃╭━━╯┃╰╮╭╯┃╭━╮┃┃╱┃┃╰╮╭╮┃╭━╮┃┃╰╮┃┃╭━━┫╭━╮┃
     ┃┃╱┃┃╰━╯┃╰━━╮╰╮╰╯╭┫┃╱┃┃┃╱┃┃╱┃┃┃┃┃╱┃┃╭╮╰╯┃╰━━╋╯╭╯┃
     ┃╰━╯┃╭╮╭┫╭━━╯╱╰╮╭╯┃┃╱┃┃┃╱┃┃╱┃┃┃┃┃╱┃┃┃╰╮┃┃╭━━╯╱┃╭╯
     ┃╭━╮┃┃┃╰┫╰━━╮╱╱┃┃╱┃╰━╯┃╰━╯┃╭╯╰╯┃╰━╯┃┃╱┃┃┃╰━━╮╱╭╮
-    ╰╯╱╰┻╯╰━┻━━━╯╱╱╰╯╱╰━━━┻━━━╯╰━━━┻━━━┻╯╱╰━┻━━━╯╱╰╯ main page/exit")
+    ╰╯╱╰┻╯╰━┻━━━╯╱╱╰╯╱╰━━━┻━━━╯╰━━━┻━━━┻╯╱╰━┻━━━╯╱╰╯ back to main page (any key)/exit")
     response = gets.chomp
 
-    break if response == "exit"
+    if response == "exit"
+        puts "
+        ╭━━╮╱╱╱╱╱╱╱╱╭━━╮╱╱╱╱╱╱╱╭┳┳╮
+        ┃╭╮┃╱╱╱╱╱╱╱╱┃╭╮┃╱╱╱╱╱╱╱┃┃┃┃
+        ┃╰╯╰┳╮╱╭┳━━╮┃╰╯╰┳╮╱╭┳━━┫┃┃┃
+        ┃╭━╮┃┃╱┃┃┃━┫┃╭━╮┃┃╱┃┃┃━╋┻┻╯
+        ┃╰━╯┃╰━╯┃┃━┫┃╰━╯┃╰━╯┃┃━╋┳┳╮
+        ╰━━━┻━╮╭┻━━╯╰━━━┻━╮╭┻━━┻┻┻╯
+        ╱╱╱╱╭━╯┃╱╱╱╱╱╱╱╱╭━╯┃
+        ╱╱╱╱╰━━╯╱╱╱╱╱╱╱╱╰━━╯"
+        break
+    end
 end
 
