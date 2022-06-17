@@ -12,36 +12,41 @@ def modify_contract
     when 1
         puts "How do you want to change it?"
         change = gets.chomp.to_i
-        new_change = Contract.update_contract(player,team).update(term_start: change)
 
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
+        Contract.update_contract(player,team).update(term_start: change)
 
     when 2
         puts "How do you want to change it?"
         change = gets.chomp.to_i
-        Contract.update_contract(player,team).update(term_end: change)
 
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
+        Contract.update_contract(player,team).update(term_end: change)
     
     when 3
         puts "How do you want to change it?"
-        
+        puts "First name".colorize(:red)
         first = gets.chomp.upcase
+
+        puts "Last name".colorize(:red)
         last = gets.chomp.upcase
         
         result = Player.find_player(first, last).id
-        Contract.update_contract(player,team).update(player_id: result)
 
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+        Contract.update_contract(player,team).update(player_id: result)
 
     when 4
         puts "How do you want to change it?"
         change = gets.chomp.upcase
         
         result = Team.find_team(change).id
-        Contract.update_contract(player,team).update(team_id: result)
 
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+
+        Contract.update_contract(player,team).update(team_id: result)
 
     when 5
         puts "How do you want to change the starting date?"
@@ -50,14 +55,17 @@ def modify_contract
         puts "How do you want to change the ending date?"
         second = gets.chomp.to_i
 
-        Contract.update_contract(player,team).update(term_start: first, term_end: second)
-
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+        Contract.update_contract(player,team).update(term_start: first, term_end: second)
 
     when 6
         puts "How do you want to change the player?"
+        puts "First name".colorize(:red)
         first = gets.chomp.upcase
+
+        puts "Last name".colorize(:red)
         last = gets.chomp.upcase
+            
             
         p_name = Player.find_player(first, last).id
 
@@ -66,9 +74,8 @@ def modify_contract
 
         t_name = Team.find_team(change).id
 
-        Contract.update_contract(player,team).update(player_id: p_name, team_id: t_name)
-
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+        Contract.update_contract(player,team).update(player_id: p_name, team_id: t_name)
 
     when 7
         delete_contract
