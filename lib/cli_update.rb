@@ -12,7 +12,7 @@ def modify_contract
     when 1
         puts "How do you want to change it?"
         change = gets.chomp.to_i
-        Contract.update_contract(player,team).update(term_start: change)
+        new_change = Contract.update_contract(player,team).update(term_start: change)
 
         puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
 

@@ -17,7 +17,6 @@ end
 def look_team_id
     puts "Look up the team you want"
     choice = gets.chomp.upcase
-    binding.pry
     team = Team.find_team(choice).id
     team
 
