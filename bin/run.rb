@@ -4,7 +4,10 @@ require 'pry'
 
 welcome
 
+PROMPT.keypress("Press any key to continue".upcase, timeout: 20)
+
 loop do
+    pic
     case option_select
     when 1
         find_team_by_user
