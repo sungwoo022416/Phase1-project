@@ -1,3 +1,4 @@
+require 'pry'
 def look_player_id
     puts "Look up the player you want"
     
@@ -15,8 +16,8 @@ end
 
 def look_team_id
     puts "Look up the team you want"
-    choice = gets.chomp.to_i
-    
+    choice = gets.chomp.upcase
+    binding.pry
     team = Team.find_team(choice).id
     team
 
