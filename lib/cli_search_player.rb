@@ -1,24 +1,38 @@
 def find_player_by_user
-    puts "Enther the player first name:"
-    first = gets.chomp.upcase
+    loop do
+        puts "Enther the player first name:"
+        first = gets.chomp.upcase
 
-    puts "Enther the player last name:"
-    last = gets.chomp.upcase
+        puts "Enther the player last name:"
+        last = gets.chomp.upcase
 
-    result = Player.find_player(first, last).inspect
-    
-    puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
-    puts result.colorize(:yellow)
+        result = Player.find_player(first, last).inspect
+
+        if result["first_name"] == nil || result["last_name"] == nil
+            puts "Can't Find! Please Try Again".colorize(:red)
+        else
+            puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+            puts result.colorize(:yellow)
+            break
+        end
+    end
 end
 
 def find_player_by_id
-    puts "Enter the team_id: "
-    choice = gets.chomp.to_i
+    loop do
+        puts "Enter the player_id: "
+        choice = gets.chomp.to_i
 
-    result = Player.find_player_id(choice).inspect
-    
-    puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
-    puts result.colorize(:magenta)
+        result = Player.find_player_id(choice).inspect
+
+        if result["id"] == nil
+            puts "Can't Find! Please Try Again".colorize(:red)
+        else
+            puts "🅢🅤🅒🅒🅔🅢🅢🅕🅤🅛❗".colorize(:light_green)
+            puts result.colorize(:magenta)
+            break
+        end
+    end
 end
 
 def player_choice
